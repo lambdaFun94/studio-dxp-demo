@@ -1,10 +1,54 @@
+import {
+  GetHeadConfig,
+  GetPath,
+  HeadConfig,
+  TemplateConfig,
+  TemplateProps,
+  TemplateRenderProps,
+} from "@yext/pages/*";
 import CheckboxContainer from "../components/CheckboxContainer";
-import CheckboxOption from "../components/CheckboxOption";
 import FormHero from "../components/FormHero";
 import FormLayout from "../components/FormLayout";
 import FormSection from "../components/FormSection";
 import FormTextInput from "../components/FormTextInput";
 import LinearScaleInput from "../components/LinearScaleInput";
+import MultipleChoiceContainer from "../components/MultipleChoiceContainer";
+import Option from "../components/Option";
+
+export const config: TemplateConfig = {
+  name: "Form",
+};
+
+/**
+ * This allows the user to define a function which will take in their template
+ * data and produce a HeadConfig object. When the site is generated, the HeadConfig
+ * will be used to generate the inner contents of the HTML document's <head> tag.
+ * This can include the title, meta tags, script tags, etc.
+ */
+export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
+  relativePrefixToRoot,
+  path,
+  document,
+}): HeadConfig => {
+  return {
+    title: "Static Page Example",
+    charset: "UTF-8",
+    viewport: "width=device-width, initial-scale=1",
+    tags: [
+      {
+        type: "meta",
+        attributes: {
+          name: "description",
+          content: "Static page example meta description.",
+        },
+      },
+    ],
+  };
+};
+
+export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  return "form";
+};
 
 export default function form() {
   return (
@@ -111,9 +155,32 @@ export default function form() {
             italicLabel={false}
             boldLabel={false}
           />
-          <CheckboxContainer label="Untitled Question" description={``}>
-            <CheckboxOption label={``} value={``} />
-            <CheckboxOption label={``} value={``} />
+          <MultipleChoiceContainer
+            label={`Do you use the Yext scan tool?`}
+            description={``}
+          >
+            <Option />
+            <Option />
+            <Option value={`No`} />
+            <Option value={``} />
+          </MultipleChoiceContainer>
+          <CheckboxContainer
+            label={`How do you use the Yext scan tool?`}
+            description={`Please select all that apply`}
+            required={false}
+            underlineDescription={false}
+            italicDescription={false}
+            boldDescription={false}
+            underlineLabel={false}
+            italicLabel={false}
+            boldLabel={false}
+          >
+            <Option value={`During the sales process`} />
+            <Option
+              value={`Internal use e.g. for research, pre call planning`}
+            />
+            <Option value={``} />
+            <Option value={``} />
           </CheckboxContainer>
         </FormSection>
       </FormLayout>

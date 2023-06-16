@@ -2,7 +2,7 @@
   "features": [
     {
       "name": "product",
-      "streamId": "skis",
+      "streamId": "product",
       "templateType": "JS",
       "entityPageSet": {
         "plugin": {}
@@ -11,25 +11,15 @@
   ],
   "streams": [
     {
-      "$id": "skis",
+      "$id": "product",
       "filter": {
-        "entityTypes": [
-          "ce_skis"
-        ]
+        "entityTypes": ["ce_product"]
       },
       "localization": {
-        "locales": [
-          "en"
-        ],
+        "locales": ["en"],
         "primary": false
       },
-      "fields": [
-        "name",
-        "c_price",
-        "description",
-        "photoGallery",
-        "slug"
-      ]
+      "fields": ["name", "c_price", "description", "photoGallery", "slug"]
     }
   ]
 }
